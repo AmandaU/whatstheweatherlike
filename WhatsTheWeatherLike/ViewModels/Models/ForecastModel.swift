@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+struct ForecastModel {
+    var day: String = ""
+    var weather: WeatherType?
+    var temperature : Double!
+    
+    var tempFormatted : String {
+        get {
+            let cent  = Int((temperature - 32.0) / 1.8)
+             return "\(String(cent))°C"
+        }
+    }
+}

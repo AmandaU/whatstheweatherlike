@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol UserLocationDelegate: class {
+    func UserLocated()
+}

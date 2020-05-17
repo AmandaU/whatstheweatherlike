@@ -14,7 +14,7 @@ class ConnectivityManager {
     let queue = DispatchQueue(label: "InternetConnectionMonitor")
     
     var isConnected: Bool = false;
-     static let connectivity = ConnectivityManager()
+    static let Instance = ConnectivityManager()
     
    private init(){
         monitor.pathUpdateHandler = { pathUpdateHandler in

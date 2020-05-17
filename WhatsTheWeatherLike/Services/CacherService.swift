@@ -8,7 +8,7 @@
 
 import Foundation
 
-final public class Cacher {
+final public class CacherService {
     /// The path in the filesystem that will hold all the persisted items
     let destination: URL
     private let queue = OperationQueue()
@@ -30,16 +30,15 @@ final public class Cacher {
     /// *Note* If using `.atFolder(String)` make sure the destination is valid.
     ///
     /// - Parameter destination: path to the location where `Cacher` will persist its `Cachable` items.
-    public init(destination: CacheDestination) {
-        switch destination {
-        case .temporary:
-            self.destination = URL(fileURLWithPath: NSTemporaryDirectory())
-        case .atFolder(let folder):
-            let documentFolder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            self.destination = URL(fileURLWithPath: documentFolder).appendingPathComponent(folder, isDirectory: true)
-        }
+    public init() {
         
-        try? FileManager.default.createDirectory(at: self.destination, withIntermediateDirectories: true, attributes: nil)
+     let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
+    
+        let documentFolder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        destination = URL(fileURLWithPath: documentFolder).appendingPathComponent(path!, isDirectory: true)
+        
+        try? FileManager.default.createDirectory(at:  destination, withIntermediateDirectories: true, attributes: nil)
+        
     }
     
     // MARK

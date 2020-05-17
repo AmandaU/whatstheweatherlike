@@ -10,25 +10,38 @@ import XCTest
 @testable import WhatsTheWeatherLike
 
 class WhatsTheWeatherLikeTests: XCTestCase {
+    
+    var viewFavouritesModel = FavouritesViewModel(cacherService: CacherService(), weatherService: WeatherService())
+    var viewCurrentModel = MyWeatherViewModel(cacherService: CacherService(), weatherService: WeatherService(), locationManager: LocationManager())
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testFetchFavourites() throws {
+        viewFavouritesModel.FetchFavourites { (success) in
+            if(success)
+            {
+                XCTAssert(success)
+            }else {
+                XCTAssert(false)
+            }
         }
     }
 
+    func testFetchCurrentWeather() throws {
+        viewCurrentModel.GetCurrentWeather { (success) in
+            if(success)
+            {
+                XCTAssert(success)
+            }else {
+                XCTAssert(false)
+            }
+        }
+    }
+    
 }
