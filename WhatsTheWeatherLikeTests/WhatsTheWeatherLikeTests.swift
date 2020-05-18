@@ -44,4 +44,22 @@ class WhatsTheWeatherLikeTests: XCTestCase {
         }
     }
     
+    func testPersist() throws {
+        viewCurrentModel.GetCurrentWeather { (success) in
+            if(success)
+            {
+                self.viewCurrentModel.AddToFavourites(name: "test")
+                self.viewFavouritesModel.GetCachedFavourites()
+                XCTAssert((self.viewFavouritesModel.Favourites?.weatherFavourites.count)! > 0)
+            }else {
+                XCTAssert(false)
+            }
+        }
+    }
+    func testFavouritesCurrentWeather() throws {
+        viewCurrentModel.GetForecastWeather(success: { (success) in
+             XCTAssert(success)
+        })
+    }
+    
 }
