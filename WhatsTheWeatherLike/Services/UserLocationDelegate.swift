@@ -9,5 +9,5 @@
 import Foundation
 
 protocol UserLocationDelegate: class {
-    func UserLocated()
+    func UserLocated(success: Bool)
 }

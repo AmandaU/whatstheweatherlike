@@ -46,6 +46,7 @@ class FavouritesViewModel {
                 print("Finished all requests.")
             }
             cacherService?.persist(item: self.Favourites!, completion: { (url, eror) in})
+            success(true)
         }
     }
 }

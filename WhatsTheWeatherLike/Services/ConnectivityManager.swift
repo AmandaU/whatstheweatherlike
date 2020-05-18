@@ -16,13 +16,13 @@ class ConnectivityManager {
     var isConnected: Bool = false;
     static let Instance = ConnectivityManager()
     
-   private init(){
+    init(){
         monitor.pathUpdateHandler = { pathUpdateHandler in
             if pathUpdateHandler.status == .satisfied {
-                self.isConnected = true
+                ConnectivityManager.self.Instance.isConnected = true
                 print("Internet connection is on.")
             } else {
-                 self.isConnected = false
+                ConnectivityManager.self.Instance.isConnected = false
                 print("There's no internet connection.")
             }
         }
@@ -31,7 +31,7 @@ class ConnectivityManager {
     
     var IsConnected: Bool {
         get {
-            return isConnected
+            return ConnectivityManager.Instance.isConnected
         }
     }
     

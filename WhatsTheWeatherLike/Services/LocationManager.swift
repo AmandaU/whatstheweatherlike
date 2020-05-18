@@ -28,10 +28,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                    LocationManager.Instance.userlocation = Coordinate(latitude: 33.441792, longitude: -94.037689)
-//                    self.delegate?.UserLocated()
-//                }
+           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+               LocationManager.Instance.userlocation = Coordinate(latitude: 33.441792, longitude: -94.037689)
+            self.delegate?.UserLocated(success:true)
+            }
+    }
+    
+    func LocateUser(){
+        locationManager.startUpdatingLocation()
     }
     
     // MARK: Location Implementation
@@ -39,13 +43,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
         print("location error is = \(error.localizedDescription)")
+        locationManager.stopUpdatingLocation()
+       // delegate?.UserLocated(success: false)
     }
     
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         
         LocationManager.Instance.userlocation = Coordinate(latitude: Double(manager.location?.coordinate.latitude ?? 0), longitude: Double(manager.location?.coordinate.longitude ?? 0))
-        delegate?.UserLocated()
+        delegate?.UserLocated(success: true)
     }
     
     var UserLocation: Coordinate {

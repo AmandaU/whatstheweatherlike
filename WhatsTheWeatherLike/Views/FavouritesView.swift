@@ -11,6 +11,7 @@ import UIKit
 
 class FavouritesView: UIViewController, UITableViewDelegate {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     lazy var ViewModel: FavouritesViewModel = FavouritesViewModel(cacherService: CacherService(), weatherService: WeatherService())
     
     @IBOutlet var FavouritesTable: UITableView!
@@ -27,6 +28,7 @@ class FavouritesView: UIViewController, UITableViewDelegate {
         ViewModel.FetchFavourites { (success) in
             if (success)
             {
+                self.activityIndicator.isHidden = true
                 self.FavouritesTable.reloadData()
             }
         }

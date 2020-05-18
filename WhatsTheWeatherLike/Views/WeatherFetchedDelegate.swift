@@ -9,5 +9,5 @@
 import Foundation
 
 protocol WeatherFetchedDelegate: class {
-    func WeatherFetched()
+    func WeatherFetched(success: Bool)
 }
