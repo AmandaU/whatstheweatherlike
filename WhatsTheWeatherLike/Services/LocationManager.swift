@@ -27,11 +27,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
-           DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-               LocationManager.Instance.userlocation = Coordinate(latitude: 33.441792, longitude: -94.037689)
-            self.delegate?.UserLocated(success:true)
-            }
     }
     
     func LocateUser(){
@@ -44,7 +39,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         print("location error is = \(error.localizedDescription)")
         locationManager.stopUpdatingLocation()
-       // delegate?.UserLocated(success: false)
+        delegate?.UserLocated(success: false)
     }
     
     func locationManager(_ manager: CLLocationManager,
